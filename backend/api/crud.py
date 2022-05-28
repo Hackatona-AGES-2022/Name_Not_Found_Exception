@@ -66,11 +66,19 @@ def create_sale(db: Session, sale: schemas.SaleCreate):
 
 
 def get_store_sales(db: Session, store_cnpj: str):
-    return db.query(models.Sale).filter(models.Sale.cnpj == store_cnpj).all()
+    return db.query(models.Sale, models.Store).filter(
+        models.Sale.cnpj == store_cnpj
+    ).join(
+        models.Store,
+        models.Store.cnpj == models.Sale.cnpj
+    ).all()
 
 
 def get_all_sales(db: Session):
-    return db.query(models.Sale).all()
+    return db.query(models.Sale, models.Store).join(
+        models.Store,
+        models.Store.cnpj == models.Sale.cnpj
+    ).all()
 
 
 def create_user_sale(db: Session, user_sale: schemas.UserSaleCreate):
@@ -86,4 +94,14 @@ def create_user_sale(db: Session, user_sale: schemas.UserSaleCreate):
 
 
 def get_user_sales(db: Session, user_id: str):
-    return db.query(models.UserSale).filter(models.UserSale.user_id == user_id).all()
+    return db.query(
+        models.UserSale,
+        models.Sale,
+        models.Store
+    ).filter(
+        models.UserSale.user_id == user_id
+    ).join(
+        models.Sale, models.Sale.id == models.UserSale.sale_id
+    ).join(
+        models.Store, models.Store.cnpj == models.Sale.cnpj
+    ).all()
