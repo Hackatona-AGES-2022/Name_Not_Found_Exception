@@ -3,7 +3,7 @@
     <v-row class="mt-12 justify-center">
       <img src="../assets/conjunkt.svg" />
     </v-row>
-    <v-row class="mt-10">
+    <v-row class="mt-14">
       <Input label="E-mail" variant="round" elevation="3" v-model="email" />
     </v-row>
     <v-row class="mt-8">
