@@ -26,6 +26,7 @@
         title="Cadastrar Promoção"
         extended
         rounded
+        class="create-button"
       />
     </div>
   </div>
@@ -41,11 +42,12 @@ export default {
   name: "Home",
   components: { Input, SaleCard, Button },
   data: () => ({
-    sales: [{}],
+    sales: [],
   }),
   async mounted() {
     this.$root.showToolbar("Mercado Pão de Açúcar");
     this.sales = await getStoreSales("9696969696");
+    console.log(this.sales);
   },
 };
 </script>
@@ -53,5 +55,9 @@ export default {
 <style scoped>
 .small {
   max-height: 36px;
+}
+.create-button {
+  position: fixed;
+  bottom: 22px;
 }
 </style>

@@ -1,21 +1,34 @@
 <template>
   <div class="card__container" v-ripple>
     <div class="card__content">
-      <div class="card__title align-self-center">Sal refinado 1KG</div>
+      <div class="card__title align-self-center">{{ sale.title }}</div>
       <div class="card__quantity align-self-center">
-        <div class="card__quantity--low">147</div>
-        <div class="card__quantity--high">/200 un.</div>
+        <div class="card__quantity--low">{{ sale.currentAmount }}</div>
+        <div class="card__quantity--high">{{ targetAmount }}</div>
       </div>
-      <div class="card__price align-self-center">R$1,74/pct</div>
+      <div class="card__price align-self-center">
+        {{ defaultPrice }}
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { toCurrency } from "../utils/currencyFormatter";
+
 export default {
   props: ["sale"],
   mounted() {
     console.log(this.sale);
+  },
+  computed: {
+    targetAmount() {
+      return `/${this.sale.targetAmount} un.`;
+    },
+    defaultPrice() {
+      const formattedPrice = toCurrency(this.sale.defaultPrice);
+      return `${formattedPrice}`;
+    },
   },
 };
 </script>
