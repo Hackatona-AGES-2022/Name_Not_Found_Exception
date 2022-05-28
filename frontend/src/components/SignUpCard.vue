@@ -2,7 +2,9 @@
   <div class="card__container" v-ripple @click='$emit(click)'>
     <div class="card__content d-flex justify-center align-center">
         <div class="image d-flex justify-left align-center">
-            <img src="../assets/arroz.svg" alt="arroz" />
+            
+            <img v-if="isStore" src="../assets/quero_vender.svg" alt="arroz" />
+            <img v-else src="../assets/quero_comprar.svg" alt="arroz" />
         </div>
         <span class="d-flex justify-left align-left">{{title}}</span>
     </div>
@@ -11,9 +13,9 @@
 
 <script>
 export default {
-  props: ["title"],
+  props: ["title", "isStore"],
   mounted() {
-    console.log(this.title);
+    console.log(this.title, this.isStore);
   },
 };
 </script>
