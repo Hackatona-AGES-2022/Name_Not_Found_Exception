@@ -81,3 +81,23 @@ Content-Type: application/json
 {
   "cnpj": "9696969696"
 }
+
+### User Authorization
+
+POST http://localhost:8000/user/authorization HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "ibarra@gmail.com",
+  "password": "18928928"
+}
+
+### Store Authorization
+
+POST http://localhost:8000/store/authorization HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "funciona@porfavor.serio",
+  "password": "1234"
+}

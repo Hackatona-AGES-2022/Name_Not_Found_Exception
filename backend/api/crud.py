@@ -41,6 +41,10 @@ def get_store_by_cnpj(db: Session, cnpj: str):
     return db.query(models.Store).filter(models.Store.cnpj == cnpj).first()
 
 
+def get_store_by_email(db: Session, email: str):
+    return db.query(models.Store).filter(models.Store.email == email).first()
+
+
 def get_all_stores(db: Session):
     return db.query(models.Store).all()
 

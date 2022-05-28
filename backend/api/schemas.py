@@ -13,6 +13,11 @@ class UserSearchByEmail(BaseModel):
     email: str
 
 
+class UserAuthorization(BaseModel):
+    email: str
+    password: str
+
+
 class StoreCreate(BaseModel):
     cnpj: str
     email: str
@@ -25,6 +30,11 @@ class StoreCreate(BaseModel):
 
 class StoreSearchByCnpj(BaseModel):
     cnpj: str
+
+
+class StoreAuthorization(BaseModel):
+    email: str
+    password: str
 
 
 class SaleCreate(BaseModel):
