@@ -10,6 +10,11 @@ const routes = [
     name: "Home",
     component: Home,
   },
+  {
+    path: "/sales/create",
+    name: "Create Sale",
+    component: Home,
+  },
 ];
 
 const router = new VueRouter({

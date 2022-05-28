@@ -21,7 +21,12 @@
     </v-row>
 
     <div class="bottom d-flex justify-center">
-      <Button title="Cadastrar Promoção" extended rounded />
+      <Button
+        @click="$router.push('/sales/create/')"
+        title="Cadastrar Promoção"
+        extended
+        rounded
+      />
     </div>
   </div>
 </template>
