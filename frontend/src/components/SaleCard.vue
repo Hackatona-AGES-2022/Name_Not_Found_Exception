@@ -6,6 +6,9 @@
         <div class="card__quantity--low">{{ sale.currentAmount }}</div>
         <div class="card__quantity--high">{{ targetAmount }}</div>
       </div>
+      <div class="card__price align-self-center default-price">
+        {{ defaultPrice }}
+      </div>
       <div class="card__price align-self-center">
         {{ targetPrice }}
       </div>
@@ -29,11 +32,20 @@ export default {
       const formattedPrice = toCurrency(this.sale.targetPrice);
       return `${formattedPrice}`;
     },
+    defaultPrice() {
+      const formattedPrice = toCurrency(this.sale.defaultPrice);
+      return `${formattedPrice}`;
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.default-price {
+  color: red;
+  text-decoration: line-through;
+  font-size: 17px !important;
+}
 .card {
   &__container {
     width: 100%;

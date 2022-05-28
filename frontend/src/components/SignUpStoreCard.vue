@@ -83,9 +83,11 @@ export default {
       HTTP.post("/store", this.store)
         .then(() => {
           this.$router.push("/sign-in?user_type=store");
+          this.$root.showSnackbar("Cadastro realizado com sucesso!");
         })
         .catch((error) => {
           console.log(error);
+          this.$root.showSnackbar("Houve um erro com o seu cadastro =(");
         });
     },
   },
