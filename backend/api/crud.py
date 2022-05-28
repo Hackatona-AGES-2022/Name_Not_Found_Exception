@@ -66,6 +66,10 @@ def create_sale(db: Session, sale: schemas.SaleCreate):
     return created_sale
 
 
+def get_sale_by_id(db: Session, id: str):
+    return db.query(models.Sale).filter(models.Sale.id == id).first()
+
+
 def get_store_sales(db: Session, store_cnpj: str):
     return db.query(models.Sale, models.Store).filter(
         models.Sale.cnpj == store_cnpj

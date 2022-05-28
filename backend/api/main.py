@@ -104,6 +104,12 @@ def get_all_sales(db: Session = Depends(get_db)):
     return sales
 
 
+@app.get("/sale/{id}")
+def get_sale_by_id(id, db: Session = Depends(get_db)):
+    sale = crud.get_sale_by_id(id=id, db=db)
+    return sale
+
+
 @app.get("/stores")
 def get_all_stores(db: Session = Depends(get_db)):
     stores = crud.get_all_stores(db=db)
