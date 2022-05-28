@@ -8,7 +8,6 @@
       <Input
         label="Pesquisar promoções..."
         prepend-inner-icon="mdi-magnify"
-        append-icon="mdi-filter-variant "
         variant="round"
         elevation="3"
       />
@@ -16,7 +15,7 @@
 
     <v-row class="justify-space-between mt-12">
       <v-col class="small" cols="6" v-for="sale in sales" :key="sale.id">
-        <SaleCard :sale="sale" />
+        <SaleCard :sale="sale" @click="onSaleClick(sale)" />
       </v-col>
     </v-row>
 
@@ -60,6 +59,10 @@ export default {
         return getStoreSales(cnpj);
       }
       return getAllSales();
+    },
+    onSaleClick(sale) {
+      const userType = getUserType();
+      this.$router.push(`/${userType}/sales/${sale.id}`);
     },
   },
   computed: {
