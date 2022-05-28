@@ -1,13 +1,14 @@
 <template>
-  <div class="card__container" v-ripple @click='$emit(click)'>
-      <v-form id="storeCredentials" class="justify-space-between align-center">
-        <Input
+  <div class="card__container">
+    <v-form id="storeCredentials" class="justify-space-between align-center">
+      <Input
         label="Digite o nome da empresa"
         prepend-inner-icon="mdi-magnify"
         append-icon="mdi-filter-variant "
         variant="round"
         class="mt-10"
         elevation="3"
+        v-model="store.name"
       />
       <Input
         label="Digite o CNPJ da empresa"
@@ -16,6 +17,7 @@
         variant="round"
         elevation="3"
         class="mt-10"
+        v-model="store.cnpj"
       />
       <Input
         label="Digite o email comercial"
@@ -23,8 +25,8 @@
         append-icon="mdi-filter-variant "
         variant="round"
         elevation="3"
-        class="mt-10 "
-
+        class="mt-10"
+        v-model="store.email"
       />
       <Input
         label="Digite o endereço da empresa"
@@ -33,6 +35,7 @@
         variant="round"
         class="mt-10"
         elevation="3"
+        v-model="store.address"
       />
       <Input
         label="Crie uma senha"
@@ -42,6 +45,7 @@
         elevation="3"
         class="mt-10"
         type="password"
+        v-model="store.password"
       />
       <Input
         label="url da imagem"
@@ -50,22 +54,54 @@
         variant="round"
         class="mt-10"
         elevation="3"
+        v-model="store.photo_link"
       />
-      </v-form>
-      <div type="submit" class="card__submitbutton d-flex justify-center align-center mt-10" form="storeCredentials" value="Submit" v-ripple @click='$emit(click)'>Submit</div>
-
+    </v-form>
+    <div
+      type="submit"
+      class="card__submitbutton d-flex justify-center align-center mt-10"
+      form="storeCredentials"
+      value="Submit"
+      v-ripple
+      @click="clickHandler"
+    >
+      Submit
+    </div>
   </div>
 </template>
 
 <script>
-    import Input from "./Input.vue";
-    export default {
-        props: ["title"],
-        mounted() {
-            console.log(this.title);
-        },
-        components: {Input}
-    };
+import { HTTP } from "../api/HTTP";
+import Input from "./Input.vue";
+export default {
+  props: ["title"],
+  mounted() {
+    console.log(this.title);
+  },
+  data: () => ({
+    store: {
+      name: "",
+      cnpj: "",
+      email: "",
+      address: "",
+      password: "",
+      photo_link: "",
+      description: "",
+    },
+  }),
+  components: { Input },
+  methods: {
+    clickHandler() {
+      HTTP.post("/store", this.store)
+        .then(() => {
+          this.$router.push("/sign-in?user_type=store");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
+};
 </script>
 <style lang="scss" scoped>
 .card {
