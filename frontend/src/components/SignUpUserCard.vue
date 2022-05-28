@@ -31,14 +31,6 @@
           @click:append="onPassClick"
         />
       </v-row>
-      <v-row class="mt-8">
-        <Input
-          label="url da imagem"
-          variant="round"
-          elevation="3"
-          v-model="user.photo_link"
-        />
-      </v-row>
     </v-form>
     <v-row class="mt-8 justify-center">
       <Button

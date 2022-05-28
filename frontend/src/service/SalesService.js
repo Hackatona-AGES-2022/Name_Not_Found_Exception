@@ -4,6 +4,7 @@ export async function getStoreSales(cnpj) {
     return HTTP.get(`store_sales/${cnpj}`)
         .then(res => {
             const sales = res.data.map(item => ({
+                id: item.Sale.id,
                 currentAmount: item.Sale.current_amount,
                 targetAmount: item.Sale.target_amount,
                 defaultPrice: item.Sale.default_price,
@@ -18,6 +19,7 @@ export async function getAllSales() {
     return HTTP.get(`sales`)
         .then(res => {
             const sales = res.data.map(item => ({
+                id: item.Sale.id,
                 currentAmount: item.Sale.current_amount,
                 targetAmount: item.Sale.target_amount,
                 defaultPrice: item.Sale.default_price,
@@ -31,6 +33,19 @@ export async function getAllSales() {
 export async function getUserSales(id) {
     return HTTP.get(`/user_sales/${id}`)
         .then(res => {
-            console.log(res);
+            const sales = res.data.map(item => ({
+                id: item.Sale.id,
+                currentAmount: item.Sale.current_amount,
+                targetAmount: item.Sale.target_amount,
+                defaultPrice: item.Sale.default_price,
+                targetPrice: item.Sale.target_price,
+                title: item.Sale.title
+            }))
+            return sales;
         })
+}
+
+export async function getSale(id) {
+    return HTTP.get(`/sale/${id}`)
+        .then(({ data }) => data)
 }

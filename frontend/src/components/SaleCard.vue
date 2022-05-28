@@ -1,5 +1,5 @@
 <template>
-  <div class="card__container" v-ripple>
+  <div class="card__container" v-ripple @click="$emit('click')">
     <div class="card__content">
       <div class="card__title align-self-center">{{ sale.title }}</div>
       <div class="card__quantity align-self-center">
