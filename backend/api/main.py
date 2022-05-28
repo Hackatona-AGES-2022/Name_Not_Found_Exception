@@ -110,13 +110,13 @@ def get_all_stores(db: Session = Depends(get_db)):
     return stores
 
 
-@app.get("/user_sales")
-def get_user_sales(user_search: schemas.UserSearchByEmail, db: Session = Depends(get_db)):
-    users_sales = crud.get_user_sales(db=db, email=user_search.email)
+@app.get("/user_sales/{user_id}")
+def get_user_sales(user_id, db: Session = Depends(get_db)):
+    users_sales = crud.get_user_sales(db=db, user_id=user_id)
     return users_sales
 
 
-@app.get("/store_sales")
-def get_user_sales(store_search: schemas.StoreSearchByCnpj, db: Session = Depends(get_db)):
-    store_sales = crud.get_store_sales(db=db, cnpj=store_search.cnpj)
+@app.get("/store_sales/{store_cnpj}")
+def get_user_sales(store_cnpj, db: Session = Depends(get_db)):
+    store_sales = crud.get_store_sales(db=db, store_cnpj=store_cnpj)
     return store_sales
