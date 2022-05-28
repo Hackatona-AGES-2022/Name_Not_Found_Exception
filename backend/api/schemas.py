@@ -9,8 +9,9 @@ class UserCreate(BaseModel):
     photo_link: Union[str, None] = None
 
 
-class UserSearchByEmail(BaseModel):
+class UserAuthorization(BaseModel):
     email: str
+    password: str
 
 
 class StoreCreate(BaseModel):
@@ -23,8 +24,9 @@ class StoreCreate(BaseModel):
     description: Union[str, None] = None
 
 
-class StoreSearchByCnpj(BaseModel):
-    cnpj: str
+class StoreAuthorization(BaseModel):
+    email: str
+    password: str
 
 
 class SaleCreate(BaseModel):
@@ -38,13 +40,16 @@ class SaleCreate(BaseModel):
 
 
 class UserSaleCreate(BaseModel):
-    email: str
-    cnpj: str
+    user_id: int
+    sale_id: int
     amount_purchased: int
 
 
 class User(UserCreate):
-    pass
+    id: int
+
+    class Config:
+        orm_mode = True
 
 
 class Store(StoreCreate):

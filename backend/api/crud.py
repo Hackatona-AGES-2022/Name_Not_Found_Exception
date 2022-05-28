@@ -41,6 +41,10 @@ def get_store_by_cnpj(db: Session, cnpj: str):
     return db.query(models.Store).filter(models.Store.cnpj == cnpj).first()
 
 
+def get_store_by_email(db: Session, email: str):
+    return db.query(models.Store).filter(models.Store.email == email).first()
+
+
 def get_all_stores(db: Session):
     return db.query(models.Store).all()
 
@@ -61,14 +65,26 @@ def create_sale(db: Session, sale: schemas.SaleCreate):
     return created_sale
 
 
+def get_store_sales(db: Session, store_cnpj: str):
+    return db.query(models.Sale, models.Store).filter(
+        models.Sale.cnpj == store_cnpj
+    ).join(
+        models.Store,
+        models.Store.cnpj == models.Sale.cnpj
+    ).all()
+
+
 def get_all_sales(db: Session):
-    return db.query(models.Sale).all()
+    return db.query(models.Sale, models.Store).join(
+        models.Store,
+        models.Store.cnpj == models.Sale.cnpj
+    ).all()
 
 
 def create_user_sale(db: Session, user_sale: schemas.UserSaleCreate):
     created_user_sale = models.UserSale(
-        email=user_sale.email,
-        cnpj=user_sale.cnpj,
+        user_id=user_sale.user_id,
+        sale_id=user_sale.sale_id,
         amount_purchased=user_sale.amount_purchased
     )
     db.add(created_user_sale)
@@ -77,9 +93,15 @@ def create_user_sale(db: Session, user_sale: schemas.UserSaleCreate):
     return created_user_sale
 
 
-def get_user_sales(db: Session, email: str):
-    return db.query(models.UserSale).filter(models.UserSale.email == email).all()
-
-
-def get_store_sales(db: Session, cnpj: str):
-    return db.query(models.UserSale).filter(models.UserSale.cnpj == cnpj).all()
+def get_user_sales(db: Session, user_id: str):
+    return db.query(
+        models.UserSale,
+        models.Sale,
+        models.Store
+    ).filter(
+        models.UserSale.user_id == user_id
+    ).join(
+        models.Sale, models.Sale.id == models.UserSale.sale_id
+    ).join(
+        models.Store, models.Store.cnpj == models.Sale.cnpj
+    ).all()
