@@ -49,10 +49,6 @@ export default {
   }
 }
 
-.full-height {
-  height: 100%;
-}
-
 .toolbar {
   background-image: linear-gradient(90deg, #85db46, #66a836);
 }

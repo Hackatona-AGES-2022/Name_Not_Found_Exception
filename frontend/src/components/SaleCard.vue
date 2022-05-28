@@ -7,7 +7,7 @@
         <div class="card__quantity--high">{{ targetAmount }}</div>
       </div>
       <div class="card__price align-self-center">
-        {{ defaultPrice }}
+        {{ targetPrice }}
       </div>
     </div>
   </div>
@@ -25,8 +25,8 @@ export default {
     targetAmount() {
       return `/${this.sale.targetAmount} un.`;
     },
-    defaultPrice() {
-      const formattedPrice = toCurrency(this.sale.defaultPrice);
+    targetPrice() {
+      const formattedPrice = toCurrency(this.sale.targetPrice);
       return `${formattedPrice}`;
     },
   },
@@ -38,7 +38,6 @@ export default {
   &__container {
     width: 100%;
     max-width: 165px;
-    height: 180px;
     background-image: linear-gradient(90deg, #e9fbda, #ffffff);
     border-radius: 16px;
     border: 2px solid #85db46;

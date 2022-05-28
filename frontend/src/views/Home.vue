@@ -1,5 +1,5 @@
 <template>
-  <div class="px-8 mt-4 view__container">
+  <div class="px-8 mt-4" fill-height>
     <v-row class="small mt-4">
       <span class="view__title">Promoções Ativas</span>
     </v-row>
@@ -15,7 +15,7 @@
     </v-row>
 
     <v-row class="justify-space-between mt-12">
-      <v-col cols="6" v-for="sale in sales" :key="sale.id">
+      <v-col class="small" cols="6" v-for="sale in sales" :key="sale.id">
         <SaleCard :sale="sale" />
       </v-col>
     </v-row>
@@ -53,9 +53,6 @@ export default {
 </script>
 
 <style scoped>
-.small {
-  max-height: 36px;
-}
 .create-button {
   position: fixed;
   bottom: 22px;
