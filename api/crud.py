@@ -33,6 +33,10 @@ def create_store(db: Session, store: schemas.StoreCreate):
     return created_store
 
 
+def get_all_stores(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.Store).offset(skip).limit(limit).all()
+
+
 def create_sale(db: Session, sale: schemas.SaleCreate):
     created_sale = models.Sale(
         cnpj=sale.cnpj,
