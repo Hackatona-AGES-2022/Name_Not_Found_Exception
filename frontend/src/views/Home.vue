@@ -12,7 +12,7 @@
         elevation="3"
       />
     </v-row>
-    <v-row class="justify-space-between">
+    <v-row class="justify-space-between mt-8">
       <v-col cols="6" v-for="sale in sales" :key="sale.id">
         <SaleCard :sale="sale" />
       </v-col>
@@ -22,7 +22,7 @@
 
 <script>
 import Input from "../components/Input.vue";
-import { getSales } from "../service/SalesService";
+import { getStoreSales } from "../service/SalesService";
 import SaleCard from "../components/SaleCard.vue";
 
 export default {
@@ -32,7 +32,7 @@ export default {
     sales: [{}],
   }),
   async mounted() {
-    this.sales = await getSales();
+    this.sales = await getStoreSales("9696969696");
   },
 };
 </script>

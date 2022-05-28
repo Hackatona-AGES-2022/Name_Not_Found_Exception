@@ -1,5 +1,5 @@
 <template>
-  <div class="card__container">
+  <div class="card__container" v-ripple>
     <div class="card__content">
       <div class="image">
         <img src="../assets/arroz.svg" alt="arroz" />
