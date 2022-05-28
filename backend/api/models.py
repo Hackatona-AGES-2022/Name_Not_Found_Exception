@@ -8,7 +8,9 @@ from .database import Base
 class User(Base):
     __tablename__ = "users"
 
-    email = Column(String, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True)
+
+    email = Column(String, index=True)
     password = Column(String, index=True)
     name = Column(String, index=True)
     photo_link = Column(String, default="", index=True)
@@ -18,6 +20,7 @@ class Store(Base):
     __tablename__ = "stores"
 
     cnpj = Column(String, primary_key=True, index=True)
+
     email = Column(String, index=True)
     password = Column(String, index=True)
     name = Column(String, index=True)
@@ -46,7 +49,7 @@ class UserSale(Base):
     __tablename__ = "users_sales"
 
     id = Column(Integer, primary_key=True, index=True)
-    email = Column(String, ForeignKey("users.email"))
-    cnpj = Column(String, ForeignKey("stores.cnpj"))
+    user_id = Column(String, ForeignKey("users.id"))
+    sale_id = Column(String, ForeignKey("sales.id"))
 
     amount_purchased = Column(Integer, index=True)
