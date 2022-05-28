@@ -49,6 +49,12 @@ def create_sale(sale: schemas.saleCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail="sale já existe")
     return crud.create_sale(db=db, sale=db_store)
 
+@app.post("/users_sales")
+def create_users_sales(users_sales: schemas.users_salesCreate, db: Session = Depends(get_db)):
+    db_users_sales = crud.get_users_sales_by_id(db, users_sales_id=users_sales.id)
+    if(db_users_sales):
+        raise HTTPException(status_code=400, detail="users_sales já existe")
+    return crud.create_users_sales(db=db, users_sales=db_users_sales)
 
 
 #########################################################
