@@ -8,6 +8,7 @@ import SignUpStore from "../views/SignUpStore.vue";
 import SignUpUser from "../views/SignUpUser.vue";
 import UserCart from '../views/UserCart.vue';
 import { getUserType } from "../service/UserService";
+import SaleView from '../views/SaleView.vue';
 
 Vue.use(VueRouter);
 
@@ -69,6 +70,16 @@ const routes = [
     path: "/user/cart/",
     name: "User Cart",
     component: UserCart,
+  },
+  {
+    path: "/store/sales/:id",
+    name: "Sale View",
+    component: SaleView,
+  },
+  {
+    path: "/user/sales/:id",
+    name: "Sale View",
+    component: SaleView,
   }
 ];
 

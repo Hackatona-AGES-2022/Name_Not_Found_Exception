@@ -90,7 +90,7 @@ export default {
   methods: {
     onCreateButtonClick() {
       const saleDTO = {
-        cnpj: "9696969696",
+        cnpj: loadUser().cnpj,
         title: this.sale.title,
         description: this.sale.description,
         target_amount: Number(this.sale.targetAmount),

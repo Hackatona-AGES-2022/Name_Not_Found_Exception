@@ -1,5 +1,5 @@
 <template>
-  <div class="card__container" v-ripple>
+  <div class="card__container" v-ripple @click="$emit('click')">
     <div class="card__content">
       <div class="card__title align-self-center">{{ sale.title }}</div>
       <div class="card__quantity align-self-center">
@@ -50,7 +50,7 @@ export default {
   &__container {
     width: 100%;
     max-width: 165px;
-    background-image: linear-gradient(90deg, #e9fbda, #ffffff);
+    background-image: linear-gradient(0deg, #e9fbda, #ffffff);
     border-radius: 16px;
     border: 2px solid #85db46;
   }
@@ -65,7 +65,7 @@ export default {
 
     .card {
       &__title {
-        font-size: 16px;
+        font-size: 22px;
         margin-top: 8px;
         font-weight: 600;
         text-align: center;
@@ -84,8 +84,7 @@ export default {
           font-weight: 600;
         }
         &--high {
-          font-size: 14px;
-          margin-top: 12px;
+          font-size: 20px;
         }
       }
     }

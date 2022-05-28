@@ -8,7 +8,6 @@
       <Input
         label="Pesquisar promoções..."
         prepend-inner-icon="mdi-magnify"
-        append-icon="mdi-filter-variant "
         variant="round"
         elevation="3"
       />
