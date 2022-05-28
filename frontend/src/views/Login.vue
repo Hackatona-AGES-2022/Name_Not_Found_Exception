@@ -15,15 +15,23 @@
         v-model="password"
       />
     </v-row>
-    <v-row class="mt-14 justify-center">
-      <Button
-        class="login-button"
-        title="Entrar"
-        extended
-        rounded
-        @click="loginButtonClick"
-      />
-    </v-row>
+    <div class="mt-12">
+      <v-row class="mt-14 justify-center">
+        <Button
+          class="login-button"
+          title="Entrar"
+          extended
+          rounded
+          @click="loginButtonClick"
+        />
+      </v-row>
+      <v-row class="justify-center mt-8">
+        <span
+          >Ainda não possui login?
+          <span class="link" @click="onSignupClick">Cadastre-se!</span></span
+        >
+      </v-row>
+    </div>
   </v-container>
 </template>
 
@@ -61,6 +69,11 @@ export default {
           this.$root.showSnackbar("E-mail ou senha incorretos.");
         });
     },
+    onSignupClick() {
+      const userType = this.$route.query.user_type;
+      const path = userType ? `/sign-up?user_type=${userType}` : "/sign-up";
+      this.$router.push(path);
+    },
   },
 };
 </script>
@@ -68,5 +81,8 @@ export default {
 <style>
 .login-button {
   width: 200px;
+}
+.link {
+  text-decoration: underline;
 }
 </style>
