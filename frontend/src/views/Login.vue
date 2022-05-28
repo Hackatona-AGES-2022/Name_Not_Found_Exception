@@ -54,7 +54,7 @@ export default {
         })
         .then((data) => {
           this.$root.currentUser = data.data;
-          // Redirecionar para outra rota.
+          this.$router.push(`/${userType}/home`);
         })
         .catch(() => {
           this.$root.showSnackbar("E-mail ou senha incorretos.");

@@ -27,6 +27,16 @@ const routes = [
     name: "Sign in",
     component: Login
   },
+  {
+    path: "/user/home",
+    name: "User Home",
+    component: Home
+  },
+  {
+    path: "/store/home",
+    name: "Store Home",
+    component: Home
+  },
 ];
 
 const router = new VueRouter({
