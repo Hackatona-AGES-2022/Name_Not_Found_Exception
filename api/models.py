@@ -1,44 +1,51 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Date, Float
 from sqlalchemy.orm import relationship
 
 from .database import Base
 
 
-class Turma(Base):
-    __tablename__ = "turmas"
+class User(Base):
+    __tablename__ = "users"
 
-    id = Column(Integer, primary_key=True, index=True)
-    ano = Column(Integer, index=True)
-    semestre = Column(Integer, index=True)
-    num_turma = Column(Integer, index=True)
-    #alunos = relationship("Aluno")
-    #horarios = relationship("Horario")
+    email = Column(String, primary_key=True, index=True)
+    password = Column(String, index=True)
+    name = Column(String, index=True)
+    photo_link = Column(String, index=True)
 
 
-class Aluno(Base):
-    __tablename__ = "alunos"
+class Store(Base):
+    __tablename__ = "stores"
 
-    id = Column(Integer, primary_key=True, index=True)
-    nome = Column(String, index=True)
-    matricula = Column(Integer, index=True)
-    #turma_id = Column(Integer, ForeignKey("turmas.id"))
-
-
-class Horario(Base):
-    __tablename__ = "horarios"
-
-    id = Column(Integer, primary_key=True, index=True)
-    hora = Column(String, index=True)
-    dia_semana = Column(Integer, index=True)
-    #turma_id = Column(Integer, ForeignKey("turmas.id"))
-
-class Disciplina(Base):
-    __tablename__ = "disciplinas"
-
-    id = Column(Integer, primary_key=True, index=True)
+    cnpj = Column(String, primary_key=True, index=True)
+    email = Column(String, index=True)
+    password = Column(String, index=True)
+    name = Column(String, index=True)
+    photo_link = Column(String, index=True)
+    address = Column(String, index=True)
+    description = Column(String, index=True)
 
 
-class Usuario(Base):
-    __tablename__ = "usuarios"
+class Sale(Base):
+    __tablename__ = "sales"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(String, primary_key=True, index=True)
+    cnpj = Column(String, ForeignKey("stores.cnpj"))
+
+    title = Column(String, index=True)
+    target_amount = Column(Integer, index=True)
+    expiration_date = Column(Date, index=True)
+    current_amount = Column(Integer, index=True)
+    target_price = Column(Float, index=True)
+    default_price = Column(Float, index=True)
+    photo_link = Column(String, index=True)
+    status = Column(Boolean, index=True)
+
+
+class UserSale(Base):
+    __tablename__ = "users_sales"
+
+    id = Column(String, primary_key=True, index=True)
+    email = Column(String, ForeignKey("users.email"))
+    cnpj = Column(String, ForeignKey("stores.cnpj"))
+
+    amount_purchased = Column(Integer, index=True)
