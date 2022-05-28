@@ -5,7 +5,7 @@
         <img v-if="isStore" src="../assets/quero_vender.svg" alt="arroz" />
         <img v-else src="../assets/quero_comprar.svg" alt="arroz" />
       </div>
-      <span class="d-flex justify-left align-left">{{ title }}</span>
+      <span class="d-flex justify-left align-left card-title">{{ title }}</span>
     </div>
   </div>
 </template>
@@ -24,10 +24,11 @@ export default {
   &__container {
     width: 100%;
     max-width: flex;
-    height: 200px;
-    background-color: #4df95e;
+    height: 160px;
+    background-image: linear-gradient(90deg, #76e426, #4da80a);
     border-radius: 16px;
     margin: 5px;
+    padding: 10px;
   }
 
   &__content {
@@ -62,5 +63,12 @@ export default {
       }
     }
   }
+}
+.card-title {
+  font-family: "Poppins";
+  font-size: 35px;
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
 }
 </style>

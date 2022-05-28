@@ -1,80 +1,69 @@
 <template>
-  <div class="card__container">
+  <div class="card__container px-6">
     <v-form id="storeCredentials" class="justify-space-between align-center">
-      <Input
-        label="Digite o nome da empresa"
-        prepend-inner-icon="mdi-magnify"
-        append-icon="mdi-filter-variant "
-        variant="round"
-        class="mt-10"
-        elevation="3"
-        v-model="store.name"
-      />
-      <Input
-        label="Digite o CNPJ da empresa"
-        prepend-inner-icon="mdi-magnify"
-        append-icon="mdi-filter-variant "
-        variant="round"
-        elevation="3"
-        class="mt-10"
-        v-model="store.cnpj"
-      />
-      <Input
-        label="Digite o email comercial"
-        prepend-inner-icon="mdi-magnify"
-        append-icon="mdi-filter-variant "
-        variant="round"
-        elevation="3"
-        class="mt-10"
-        v-model="store.email"
-      />
-      <Input
-        label="Digite o endereço da empresa"
-        prepend-inner-icon="mdi-magnify"
-        append-icon="mdi-filter-variant "
-        variant="round"
-        class="mt-10"
-        elevation="3"
-        v-model="store.address"
-      />
-      <Input
-        label="Crie uma senha"
-        prepend-inner-icon="mdi-magnify"
-        append-icon="mdi-filter-variant "
-        variant="round"
-        elevation="3"
-        class="mt-10"
-        type="password"
-        v-model="store.password"
-      />
-      <Input
-        label="url da imagem"
-        prepend-inner-icon="mdi-magnify"
-        append-icon="mdi-filter-variant "
-        variant="round"
-        class="mt-10"
-        elevation="3"
-        v-model="store.photo_link"
-      />
+      <v-row class="mt-8">
+        <Input
+          label="Nome da Empresa"
+          placeholder="Atacadão do Cássio"
+          variant="round"
+          elevation="3"
+          v-model="store.name"
+        />
+      </v-row>
+      <v-row class="mt-8">
+        <Input
+          label="CNPJ"
+          variant="round"
+          elevation="3"
+          v-model="store.cnpj"
+        />
+      </v-row>
+      <v-row class="mt-8">
+        <Input
+          label="Endereço"
+          variant="round"
+          elevation="3"
+          v-model="store.address"
+        />
+      </v-row>
+      <v-row class="mt-8">
+        <Input
+          label="E-mail comercial"
+          variant="round"
+          elevation="3"
+          v-model="store.email"
+        />
+      </v-row>
+      <v-row class="mt-8">
+        <Input
+          label="Senha"
+          variant="round"
+          elevation="3"
+          type="password"
+          v-model="store.password"
+        />
+      </v-row>
     </v-form>
-    <div
-      type="submit"
-      class="card__submitbutton d-flex justify-center align-center mt-10"
-      form="storeCredentials"
-      value="Submit"
-      v-ripple
-      @click="clickHandler"
-    >
-      Submit
-    </div>
+    <v-row class="mt-8 justify-center">
+      <Button
+        @click="clickHandler"
+        rounded
+        extended
+        title="Cadastrar"
+        style="width: 200px"
+      />
+    </v-row>
   </div>
 </template>
 
 <script>
 import { HTTP } from "../api/HTTP";
 import Input from "./Input.vue";
+import Button from "./Button.vue";
+
 export default {
   props: ["title"],
+  components: { Input, Button },
   mounted() {
     console.log(this.title);
   },
@@ -89,7 +78,6 @@ export default {
       description: "",
     },
   }),
-  components: { Input },
   methods: {
     clickHandler() {
       HTTP.post("/store", this.store)

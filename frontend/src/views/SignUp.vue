@@ -1,6 +1,6 @@
 <template>
   <v-container class="px-8 mt-4">
-    <v-row>
+    <v-row class="mt-12">
       <span class="view__title">O que você deseja fazer no aplicativo?</span>
     </v-row>
     <v-row class="mt-8">
@@ -31,3 +31,10 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+.view__title {
+  font-size: 1.9rem;
+  text-align: center;
+}
+</style>

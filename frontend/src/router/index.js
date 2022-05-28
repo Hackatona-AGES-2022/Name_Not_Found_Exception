@@ -3,10 +3,11 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import CreateSale from '../views/CreateSale.vue';
 import Login from "../views/Login.vue";
-import { getUserType } from '../service/UserService';
 import SignUp from "../views/SignUp.vue";
 import SignUpStore from "../views/SignUpStore.vue";
 import SignUpUser from "../views/SignUpUser.vue";
+import UserCart from '../views/UserCart.vue';
+import { getUserType } from "../service/UserService";
 
 Vue.use(VueRouter);
 
@@ -58,11 +59,17 @@ const routes = [
     path: "/sign-up-store",
     name: "SignUpStore",
     component: SignUpStore,
-  }, {
+  },
+  {
     path: "/sign-up-user",
     name: "SignUpUser",
     component: SignUpUser,
   },
+  {
+    path: "/user/cart/",
+    name: "User Cart",
+    component: UserCart,
+  }
 ];
 
 const router = new VueRouter({
@@ -84,19 +91,5 @@ function storeMiddleware({ next }) {
   }
   return next({ name: 'Spre Sign In' });
 }
-
-// router.beforeEach((to, from, next) => {
-//   const preSignIn = 'Pre Sign In';
-//   if (to.name !== preSignIn) {
-//     const type = getUserType();
-//     if (to.path.startsWith(`/${type}`)) {
-//       next()
-//     } else {
-//       next({ name: preSignIn });
-//     }
-//   } else {
-//     next();
-//   }
-// })
 
 export default router;
