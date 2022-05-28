@@ -21,7 +21,7 @@ class Store(Base):
     email = Column(String, index=True)
     password = Column(String, index=True)
     name = Column(String, index=True)
-    photo_link = Column(String, index=True)
+    photo_link = Column(String, default="", index=True)
     address = Column(String, index=True)
     description = Column(String, default="", index=True)
 

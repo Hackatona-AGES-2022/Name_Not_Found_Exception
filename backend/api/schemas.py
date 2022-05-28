@@ -14,19 +14,19 @@ class StoreCreate(BaseModel):
     email: str
     password: str
     name: str
-    photo_link = Union[str, None] = None
-    address = str
-    description = Union[str, None] = None
+    photo_link: Union[str, None] = None
+    address: str
+    description: Union[str, None] = None
 
 
 class SaleCreate(BaseModel):
     cnpj: str
-    title = str
-    target_amount = int
-    expiration_date = str
-    target_price = float
-    default_price = float
-    photo_link = Union[str, None] = None
+    title: str
+    target_amount: int
+    expiration_date: str
+    target_price: float
+    default_price: float
+    photo_link: Union[str, None] = None
 
 
 class UserSaleCreate(BaseModel):
