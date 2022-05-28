@@ -76,6 +76,7 @@ import TextArea from "../components/TextArea.vue";
 import DatePicker from "../components/DatePicker.vue";
 import Button from "../components/Button.vue";
 import { HTTP } from "../api/HTTP";
+import { loadUser } from "../service/UserService";
 
 export default {
   components: { Input, TextArea, DatePicker, Button },
@@ -83,7 +84,8 @@ export default {
     sale: {},
   }),
   mounted() {
-    this.$root.showToolbar("Mercado Pão de Açúcar");
+    const user = loadUser();
+    this.$root.showToolbar(user.name);
   },
   methods: {
     onCreateButtonClick() {

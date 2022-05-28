@@ -14,6 +14,9 @@
       <v-app-bar-title>{{ $root.toolbarTitle }}</v-app-bar-title>
 
       <v-spacer></v-spacer>
+      <v-btn v-if="isUser" icon @click="$router.push('/user/cart')">
+        <v-icon>mdi-cart-outline</v-icon>
+      </v-btn>
     </v-app-bar>
 
     <v-main>
@@ -26,12 +29,19 @@
 </template>
 
 <script>
+import { loadUser } from "./service/UserService";
 export default {
   name: "App",
 
   data: () => ({
     //
   }),
+  computed: {
+    isUser() {
+      const user = loadUser();
+      return user && !user.cnpj;
+    },
+  },
 };
 </script>
 

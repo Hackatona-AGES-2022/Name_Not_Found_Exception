@@ -6,7 +6,7 @@
     <v-row class="mt-14">
       <Input label="E-mail" variant="round" elevation="3" v-model="email" />
     </v-row>
-    <v-row class="mt-8">
+    <v-row class="mt-10">
       <Input
         label="Senha"
         type="password"
