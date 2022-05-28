@@ -117,6 +117,6 @@ def get_user_sales(user_id, db: Session = Depends(get_db)):
 
 
 @app.get("/store_sales/{store_cnpj}")
-def get_user_sales(store_cnpj, db: Session = Depends(get_db)):
+def get_store_sales(store_cnpj, db: Session = Depends(get_db)):
     store_sales = crud.get_store_sales(db=db, store_cnpj=store_cnpj)
     return store_sales

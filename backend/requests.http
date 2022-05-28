@@ -41,7 +41,7 @@ Content-Type: application/json
 
 {
   "cnpj": "9696969696",
-  "title": "Milk",
+  "title": "Bread",
   "target_amount": 50,
   "expiration_date": "2022-09-09",
   "target_price": 3.8,
@@ -60,7 +60,7 @@ Content-Type: application/json
 
 {
   "user_id": 1,
-  "cnpj": "9696969696",
+  "sale_id": 1,
   "amount_purchased": 10
 }
 

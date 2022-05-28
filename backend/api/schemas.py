@@ -41,7 +41,7 @@ class SaleCreate(BaseModel):
 
 class UserSaleCreate(BaseModel):
     user_id: int
-    cnpj: str
+    sale_id: int
     amount_purchased: int
 
 

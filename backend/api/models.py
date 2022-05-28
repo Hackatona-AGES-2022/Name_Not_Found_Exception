@@ -50,6 +50,6 @@ class UserSale(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(String, ForeignKey("users.id"))
-    cnpj = Column(String, ForeignKey("stores.cnpj"))
+    sale_id = Column(String, ForeignKey("sales.id"))
 
     amount_purchased = Column(Integer, index=True)
