@@ -1,51 +1,57 @@
-from typing import List, Union
+from typing import Union
 from pydantic import BaseModel
 
 
-class TurmaCreate(BaseModel):
-    ano: int
-    semestre: int
-    num_turma: int
+class UserCreate(BaseModel):
+    email: int
+    password: int
+    name: int
+    photo_link: Union[str, None] = None
 
 
-class AlunoCreate(BaseModel):
-    nome: str
-    matricula: str
+class StoreCreate(BaseModel):
+    cnpj: str
+    email: str
+    password: str
+    name: str
+    photo_link = Union[str, None] = None
+    address = str
+    description = Union[str, None] = None
 
 
-class Aluno(AlunoCreate):
+class SaleCreate(BaseModel):
+    cnpj: str
+    title = str
+    target_amount = int
+    expiration_date = str
+    target_price = float
+    default_price = float
+    photo_link = Union[str, None] = None
+
+
+class UserSaleCreate(BaseModel):
+    email: str
+    cnpj: str
+    amount_purchased: int
+
+
+class User(UserCreate):
+    pass
+
+
+class Store(StoreCreate):
+    pass
+
+
+class Sale(SaleCreate):
     id: int
 
     class Config:
         orm_mode = True
 
 
-class HorarioCreate(BaseModel):
-    hora: str
-    dia_semana: str
-
-
-class Horario(HorarioCreate):
+class UserSale(UserSaleCreate):
     id: int
-
-    class Config:
-        orm_mode = True
-
-
-class Disciplina(BaseModel):
-    pass
-
-
-class Usuario(BaseModel):
-    pass
-
-
-class Turma(TurmaCreate):
-    id: int
-    #alunos: List[Aluno]
-    #horarios: List[Horario]
-    #disciplina: Disciplina
-    #usuario: Usuario
 
     class Config:
         orm_mode = True
