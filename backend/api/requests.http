@@ -9,13 +9,17 @@ GET http://localhost:8000/docs HTTP/1.1
 GET http://localhost:8000/users/ HTTP/1.1
 
 ###
-POST http://localhost:8000/turmas HTTP/1.1
+POST http://localhost:8000/store HTTP/1.1
 Content-Type: application/json
 
 {
-  "ano": "2022",
-  "semestre": "1",
-  "num_turma": "31"
+  "cnpj": "9696969696",
+  "email": "funciona@porfavor.serio",
+  "password": "1234",
+  "name": "pelamor",
+  "photo_link": "atane",
+  "address": "rua vaifuncionarmesmo",
+  "description": "puts"
 }
 
 ###
