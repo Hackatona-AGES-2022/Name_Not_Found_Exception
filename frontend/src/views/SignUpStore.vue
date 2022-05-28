@@ -1,18 +1,15 @@
 <template>
-  <SignUpStoreCard>
-      
-  </SignUpStoreCard>
+  <SignUpStoreCard> </SignUpStoreCard>
 </template>
 
 <script>
-import SignUpStoreCard from '../components/SignUpStoreCard.vue';
+import SignUpStoreCard from "../components/SignUpStoreCard.vue";
 
 export default {
   name: "SignUpStore",
-  components: {SignUpStoreCard}
+  components: { SignUpStoreCard },
 };
 </script>
 
 <style>
-
 </style>

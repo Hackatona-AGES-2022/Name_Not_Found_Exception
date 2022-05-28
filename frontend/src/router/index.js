@@ -7,6 +7,7 @@ import SignUp from "../views/SignUp.vue";
 import SignUpStore from "../views/SignUpStore.vue";
 import SignUpUser from "../views/SignUpUser.vue";
 import UserCart from '../views/UserCart.vue';
+import { getUserType } from "../service/UserService";
 
 Vue.use(VueRouter);
 
@@ -30,16 +31,25 @@ const routes = [
     path: "/user/home",
     name: "User Home",
     component: Home,
+    meta: {
+      middleware: userMiddleware
+    }
   },
   {
     path: "/store/home",
     name: "Store Home",
-    component: Home
+    component: Home,
+    meta: {
+      middleware: storeMiddleware
+    }
   },
   {
     path: "/store/sales/create",
     name: "Create Sale",
     component: CreateSale,
+    meta: {
+      middleware: storeMiddleware
+    }
   },
   {
     path: "/sign-up",
@@ -65,5 +75,21 @@ const routes = [
 const router = new VueRouter({
   routes,
 });
+
+function userMiddleware({ next }) {
+  const type = getUserType();
+  if (type === 'user') {
+    next();
+  }
+  return next({ name: 'Spre Sign In' });
+}
+
+function storeMiddleware({ next }) {
+  const type = getUserType();
+  if (type === 'store') {
+    next();
+  }
+  return next({ name: 'Spre Sign In' });
+}
 
 export default router;
