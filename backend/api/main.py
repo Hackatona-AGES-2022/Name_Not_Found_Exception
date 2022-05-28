@@ -50,7 +50,7 @@ def create_sale(sale: schemas.SaleCreate, db: Session = Depends(get_db)):
     return crud.create_sale(db=db, sale=sale)
 
 
-@app.post("/users_sales")
+@app.post("/user_sale")
 def create_user_sale(user_sale: schemas.UserSaleCreate, db: Session = Depends(get_db)):
     return crud.create_user_sale(db=db, user_sale=user_sale)
 
@@ -78,5 +78,5 @@ def get_user_sales(user_search: schemas.UserSearchByEmail, db: Session = Depends
 
 @app.get("/store_sales")
 def get_user_sales(store_search: schemas.StoreSearchByCnpj, db: Session = Depends(get_db)):
-    store_sales = crud.get_user_sales(db=db, cnpj=store_search.cnpj)
+    store_sales = crud.get_store_sales(db=db, cnpj=store_search.cnpj)
     return store_sales
