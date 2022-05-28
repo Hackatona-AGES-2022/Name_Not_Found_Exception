@@ -1,12 +1,11 @@
 <template>
-  <div class="card__container" v-ripple @click='$emit(click)'>
+  <div class="card__container" v-ripple @click="$emit('click')">
     <div class="card__content d-flex justify-center align-center">
-        <div class="image d-flex justify-left align-center">
-            
-            <img v-if="isStore" src="../assets/quero_vender.svg" alt="arroz" />
-            <img v-else src="../assets/quero_comprar.svg" alt="arroz" />
-        </div>
-        <span class="d-flex justify-left align-left">{{title}}</span>
+      <div class="image d-flex justify-left align-center">
+        <img v-if="isStore" src="../assets/quero_vender.svg" alt="arroz" />
+        <img v-else src="../assets/quero_comprar.svg" alt="arroz" />
+      </div>
+      <span class="d-flex justify-left align-left">{{ title }}</span>
     </div>
   </div>
 </template>

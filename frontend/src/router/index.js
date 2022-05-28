@@ -37,12 +37,18 @@ const routes = [
   {
     path: "/store/home",
     name: "Store Home",
-    component: Home
+    component: Home,
+    meta: {
+      middleware: storeMiddleware
+    }
   },
   {
     path: "/store/sales/create",
     name: "Create Sale",
     component: CreateSale,
+    meta: {
+      middleware: storeMiddleware
+    }
   },
   {
     path: "/sign-up",
@@ -63,20 +69,20 @@ const router = new VueRouter({
   routes,
 });
 
-function userMiddleware({ next, to }) {
+function userMiddleware({ next }) {
   const type = getUserType();
   if (type === 'user') {
     next();
   }
-  return false;
+  return next({ name: 'Spre Sign In' });
 }
 
-function storeMiddleware({ next, to }) {
+function storeMiddleware({ next }) {
   const type = getUserType();
-  if (type === 'user') {
+  if (type === 'store') {
     next();
   }
-  return false;
+  return next({ name: 'Spre Sign In' });
 }
 
 // router.beforeEach((to, from, next) => {
