@@ -72,9 +72,11 @@ export default {
       HTTP.post("/user", this.user)
         .then(() => {
           this.$router.push("/sign-in?user_type=user");
+          this.$root.showSnackbar("Cadastro realizado com sucesso!");
         })
         .catch((error) => {
           console.log(error);
+          this.$root.showSnackbar("Houve um erro com o seu cadastro =(");
         });
     },
   },
