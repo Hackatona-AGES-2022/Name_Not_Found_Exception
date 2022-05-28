@@ -1,7 +1,6 @@
 from typing import List
 from sqlalchemy.orm import Session
 
-from fastapi.middleware.cors import CORSMiddleware
 from fastapi import Depends, FastAPI, HTTPException
 
 from . import crud, models, schemas
@@ -16,14 +15,6 @@ origins = [
 
 app = FastAPI()
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
 # Dependency
 def get_db():
     db = SessionLocal()
@@ -37,6 +28,30 @@ async def read_root():
     item = {"Hello": "World"}
     return item
 
+@app.post("/user")
+def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
+    db_user = crud.get_user_by_email(db, user_email=user.email)
+    if(db_user):
+        raise HTTPException(status_code=400, detail="user já existe")
+    return crud.create_user(db=db, user=db_user)
+
+@app.post("/store")
+def create_store(store: schemas.storeCreate, db: Session = Depends(get_db)):
+    db_store = crud.get_store_by_cnpj(db, store_cnpj=store.cnpj)
+    if(db_store):
+        raise HTTPException(status_code=400, detail="store já existe")
+    return crud.create_store(db=db, store=db_store)
+
+@app.post("/sale")
+def create_sale(sale: schemas.saleCreate, db: Session = Depends(get_db)):
+    db_store = crud.get_store_by_id(db, sale_id=sale.id)
+    if(db_store):
+        raise HTTPException(status_code=400, detail="sale já existe")
+    return crud.create_sale(db=db, sale=db_store)
+
+
+
+#########################################################
 
 @app.post("/turmas", response_model=schemas.Turma)
 def create_turmas(turma: schemas.TurmaCreate, db: Session = Depends(get_db)):
@@ -51,7 +66,7 @@ def read_turmas(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     return turmas
 
 
-@app.post("/alunos", response_model=schemas.Aluno)
+@app.post("/sale/{preco}", response_model=schemas.Aluno)
 def create_alunos(aluno: schemas.AlunoCreate, db: Session = Depends(get_db)):
     db_aluno = crud.get_aluno_by_matricula(db, matricula=aluno.matricula)
     if db_aluno:
