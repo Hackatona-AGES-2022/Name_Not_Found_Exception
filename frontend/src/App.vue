@@ -1,13 +1,17 @@
 <template>
   <v-app>
-    <v-app-bar class="toolbar" app color="primary" dark>
+    <v-app-bar
+      class="toolbar"
+      app
+      color="primary"
+      dark
+      v-if="$root.isToolbarVisible"
+    >
       <v-btn icon>
         <v-icon>mdi-menu</v-icon>
       </v-btn>
 
-      <v-app-bar-title v-if="$root.isToolbarVisible">{{
-        $root.toolbarTitle
-      }}</v-app-bar-title>
+      <v-app-bar-title>{{ $root.toolbarTitle }}</v-app-bar-title>
 
       <v-spacer></v-spacer>
     </v-app-bar>
@@ -15,6 +19,9 @@
     <v-main>
       <router-view />
     </v-main>
+    <v-snackbar v-model="$root.isSnackbarVisible">
+      {{ $root.snackbarText }}
+    </v-snackbar>
   </v-app>
 </template>
 
