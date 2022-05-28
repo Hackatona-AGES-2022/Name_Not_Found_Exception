@@ -42,6 +42,7 @@ class Sale(Base):
     target_price = Column(Float, index=True)
     default_price = Column(Float, index=True)
     photo_link = Column(String, default="", index=True)
+    description = Column(String, default="", index=True)
     status = Column(Integer, default=1, index=True)
 
 

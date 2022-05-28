@@ -41,11 +41,12 @@ Content-Type: application/json
 
 {
   "cnpj": "9696969696",
-  "title": "Bread",
+  "title": "Ice Cream",
   "target_amount": 50,
   "expiration_date": "2022-09-09",
   "target_price": 3.8,
   "default_price": 5,
+  "description": "Description",
   "photo_link": ""
 }
 

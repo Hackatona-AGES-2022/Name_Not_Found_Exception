@@ -36,6 +36,7 @@ class SaleCreate(BaseModel):
     expiration_date: str
     target_price: float
     default_price: float
+    description: Union[str, None] = None
     photo_link: Union[str, None] = None
 
 

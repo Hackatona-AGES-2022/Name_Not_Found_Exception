@@ -57,6 +57,7 @@ def create_sale(db: Session, sale: schemas.SaleCreate):
         expiration_date=sale.expiration_date,
         target_price=sale.target_price,
         default_price=sale.default_price,
+        description=sale.description,
         photo_link=sale.photo_link
     )
     db.add(created_sale)

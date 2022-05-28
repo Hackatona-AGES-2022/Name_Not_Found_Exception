@@ -14,7 +14,10 @@ new Vue({
   render: (h) => h(App),
   data: () => ({
     toolbarTitle: '',
-    isToolbarVisible: false
+    isToolbarVisible: false,
+    isSnackbarVisible: false,
+    snackbarText: "",
+    currentUserData: {}
   }),
   methods: {
     showToolbar(title) {
@@ -23,6 +26,10 @@ new Vue({
     },
     hideToolbar() {
       this.isToolbarVisible = false;
+    },
+    showSnackbar(text) {
+      this.snackbarText = text;
+      this.isSnackbarVisible = true;
     }
   }
 }).$mount("#app");
