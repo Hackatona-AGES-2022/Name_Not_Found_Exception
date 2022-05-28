@@ -30,7 +30,9 @@
 <script>
 import Input from "../components/Input.vue";
 import Button from "../components/Button.vue";
-import axios from "axios";
+import { HTTP } from "../api/HTTP";
+import { saveUser } from "../service/UserService";
+
 export default {
   data: () => ({
     email: "",
@@ -47,13 +49,12 @@ export default {
     loginButtonClick() {
       const userType =
         this.$route.query.user_type === "user" ? "user" : "store";
-      axios
-        .post(`http://localhost:8000/${userType}/authorization`, {
-          email: this.email,
-          password: this.password,
-        })
+      HTTP.post(`${userType}/authorization`, {
+        email: this.email,
+        password: this.password,
+      })
         .then((data) => {
-          this.$root.currentUser = data.data;
+          saveUser(data.data);
           this.$router.push(`/${userType}/home`);
         })
         .catch(() => {

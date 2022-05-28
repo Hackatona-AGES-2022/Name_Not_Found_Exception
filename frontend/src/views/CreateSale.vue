@@ -75,7 +75,7 @@ import Input from "../components/Input.vue";
 import TextArea from "../components/TextArea.vue";
 import DatePicker from "../components/DatePicker.vue";
 import Button from "../components/Button.vue";
-import axios from "axios";
+import { HTTP } from "../api/HTTP";
 
 export default {
   components: { Input, TextArea, DatePicker, Button },
@@ -98,14 +98,13 @@ export default {
         photo_link: "",
       };
 
-      axios
-        .post("/sale", saleDTO)
+      HTTP.post("/sale", saleDTO)
         .then(() => {
-          //   this.$root.showSnackbar()
-          console.log("funcionou!!!");
+          this.$root.showSnackbar("Promoção cadastrada!");
+          this.$router.push("/store/home");
         })
         .catch(() => {
-          console.log(":/");
+          this.$root.showSnackbar("Oops! Houve um erro :(");
         });
     },
   },
