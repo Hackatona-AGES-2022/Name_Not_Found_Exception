@@ -34,7 +34,7 @@ class Sale(Base):
 
     title = Column(String, index=True)
     target_amount = Column(Integer, index=True)
-    expiration_date = Column(Date, index=True)
+    expiration_date = Column(String, index=True)
     current_amount = Column(Integer, default=0, index=True)
     target_price = Column(Float, index=True)
     default_price = Column(Float, index=True)

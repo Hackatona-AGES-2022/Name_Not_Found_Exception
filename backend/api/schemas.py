@@ -3,10 +3,14 @@ from pydantic import BaseModel
 
 
 class UserCreate(BaseModel):
-    email: int
-    password: int
-    name: int
+    email: str
+    password: str
+    name: str
     photo_link: Union[str, None] = None
+
+
+class UserSearchByEmail(BaseModel):
+    email: str
 
 
 class StoreCreate(BaseModel):
@@ -17,6 +21,10 @@ class StoreCreate(BaseModel):
     photo_link: Union[str, None] = None
     address: str
     description: Union[str, None] = None
+
+
+class StoreSearchByCnpj(BaseModel):
+    cnpj: str
 
 
 class SaleCreate(BaseModel):
