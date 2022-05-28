@@ -1,9 +1,10 @@
 <template>
-  <v-container class="px-8 mt-4">
-    <v-row>
+  <div class="px-8 mt-4" fill-height>
+    <v-row class="small mt-4">
       <span class="view__title">Promoções Ativas</span>
     </v-row>
-    <v-row class="mt-6">
+
+    <v-row class="small mt-6">
       <Input
         label="Pesquisar promoções..."
         prepend-inner-icon="mdi-magnify"
@@ -12,27 +13,48 @@
         elevation="3"
       />
     </v-row>
-    <v-row class="justify-space-between">
-      <v-col cols="6" v-for="sale in sales" :key="sale.id">
+
+    <v-row class="justify-space-between mt-12">
+      <v-col class="small" cols="6" v-for="sale in sales" :key="sale.id">
         <SaleCard :sale="sale" />
       </v-col>
     </v-row>
-  </v-container>
+
+    <div class="bottom d-flex justify-center">
+      <Button
+        @click="$router.push('/sales/create/')"
+        title="Cadastrar Promoção"
+        extended
+        rounded
+        class="create-button"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
 import Input from "../components/Input.vue";
-import { getSales } from "../service/SalesService";
+import { getStoreSales } from "../service/SalesService";
 import SaleCard from "../components/SaleCard.vue";
+import Button from "../components/Button.vue";
 
 export default {
   name: "Home",
-  components: { Input, SaleCard },
+  components: { Input, SaleCard, Button },
   data: () => ({
-    sales: [{}],
+    sales: [],
   }),
   async mounted() {
-    this.sales = await getSales();
+    this.$root.showToolbar("Mercado Pão de Açúcar");
+    this.sales = await getStoreSales("9696969696");
+    console.log(this.sales);
   },
 };
 </script>
+
+<style scoped>
+.create-button {
+  position: fixed;
+  bottom: 22px;
+}
+</style>

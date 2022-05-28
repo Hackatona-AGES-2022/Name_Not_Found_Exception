@@ -12,4 +12,17 @@ new Vue({
   store,
   vuetify,
   render: (h) => h(App),
+  data: () => ({
+    toolbarTitle: '',
+    isToolbarVisible: false
+  }),
+  methods: {
+    showToolbar(title) {
+      this.toolbarTitle = title;
+      this.isToolbarVisible = true;
+    },
+    hideToolbar() {
+      this.isToolbarVisible = false;
+    }
+  }
 }).$mount("#app");

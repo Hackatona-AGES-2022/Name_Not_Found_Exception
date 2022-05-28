@@ -1,36 +1,19 @@
-async function getSales() {
-    return [
-        {
-            id: 1,
-            title: "Sal Refinado 1KG",
-            currentAmount: "147",
-            totalAmount: "200",
-            discountPrice: 1.47,
-        },
-        {
-            id: 2,
-            title: "Sal Refinado 1KG",
-            currentAmount: "147",
-            totalAmount: "200",
-            discountPrice: 1.47,
-        },
-        {
-            id: 3,
-            title: "Sal Refinado 1KG",
-            currentAmount: "147",
-            totalAmount: "200",
-            discountPrice: 1.47,
-        },
-        {
-            id: 4,
-            title: "Sal Refinado 1KG",
-            currentAmount: "147",
-            totalAmount: "200",
-            discountPrice: 1.47,
-        }
-    ]
+import { HTTP } from "../api/HTTP"
+
+async function getStoreSales(cnpj) {
+    return HTTP.get(`store_sales/${cnpj}`)
+        .then(res => {
+            const sales = res.data.map(item => ({
+                currentAmount: item.Sale.current_amount,
+                targetAmount: item.Sale.target_amount,
+                defaultPrice: item.Sale.default_price,
+                targetPrice: item.Sale.target_price,
+                title: item.Sale.title
+            }))
+            return sales;
+        })
 }
 
-module.exports = {
-    getSales
+export {
+    getStoreSales
 }
