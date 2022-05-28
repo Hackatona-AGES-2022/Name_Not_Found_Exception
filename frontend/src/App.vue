@@ -7,8 +7,8 @@
       dark
       v-if="$root.isToolbarVisible"
     >
-      <v-btn icon>
-        <v-icon>mdi-menu</v-icon>
+      <v-btn icon @click="$router.go(-1)">
+        <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
 
       <v-app-bar-title>{{ $root.toolbarTitle }}</v-app-bar-title>

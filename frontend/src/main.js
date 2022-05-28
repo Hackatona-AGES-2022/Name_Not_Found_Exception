@@ -17,7 +17,6 @@ new Vue({
     isToolbarVisible: false,
     isSnackbarVisible: false,
     snackbarText: "",
-    currentUserData: {}
   }),
   methods: {
     showToolbar(title) {

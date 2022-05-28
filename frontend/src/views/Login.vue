@@ -15,22 +15,32 @@
         v-model="password"
       />
     </v-row>
-    <v-row class="mt-14 justify-center">
-      <Button
-        class="login-button"
-        title="Entrar"
-        extended
-        rounded
-        @click="loginButtonClick"
-      />
-    </v-row>
+    <div class="mt-12">
+      <v-row class="mt-14 justify-center">
+        <Button
+          class="login-button"
+          title="Entrar"
+          extended
+          rounded
+          @click="loginButtonClick"
+        />
+      </v-row>
+      <v-row class="justify-center mt-8">
+        <span
+          >Ainda não possui login?
+          <span class="link" @click="onSignupClick">Cadastre-se!</span></span
+        >
+      </v-row>
+    </div>
   </v-container>
 </template>
 
 <script>
 import Input from "../components/Input.vue";
 import Button from "../components/Button.vue";
-import axios from "axios";
+import { HTTP } from "../api/HTTP";
+import { saveUser } from "../service/UserService";
+
 export default {
   data: () => ({
     email: "",
@@ -47,18 +57,22 @@ export default {
     loginButtonClick() {
       const userType =
         this.$route.query.user_type === "user" ? "user" : "store";
-      axios
-        .post(`http://localhost:8000/${userType}/authorization`, {
-          email: this.email,
-          password: this.password,
-        })
+      HTTP.post(`${userType}/authorization`, {
+        email: this.email,
+        password: this.password,
+      })
         .then((data) => {
-          this.$root.currentUser = data.data;
+          saveUser(data.data);
           this.$router.push(`/${userType}/home`);
         })
         .catch(() => {
           this.$root.showSnackbar("E-mail ou senha incorretos.");
         });
+    },
+    onSignupClick() {
+      const userType = this.$route.query.user_type;
+      const path = userType ? `/sign-up?user_type=${userType}` : "/sign-up";
+      this.$router.push(path);
     },
   },
 };
@@ -67,5 +81,8 @@ export default {
 <style>
 .login-button {
   width: 200px;
+}
+.link {
+  text-decoration: underline;
 }
 </style>

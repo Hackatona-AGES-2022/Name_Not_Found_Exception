@@ -10,11 +10,17 @@
         placeholder="Arroz 1KG"
         variant="round"
         elevation="3"
+        v-model="sale.title"
       />
     </v-row>
 
     <v-row class="mt-8">
-      <TextArea label="Descrição" variant="round" elevation="3" />
+      <TextArea
+        label="Descrição"
+        variant="round"
+        elevation="3"
+        v-model="sale.description"
+      />
     </v-row>
 
     <v-row class="mt-8">
@@ -24,11 +30,13 @@
         variant="round"
         elevation="3"
         type="number"
+        v-model="sale.targetAmount"
+        hint="Quantos itens terão na sua promoção."
       />
     </v-row>
 
     <v-row class="mt-8">
-      <DatePicker />
+      <DatePicker v-model="sale.expirationDate" />
     </v-row>
 
     <v-row class="mt-8">
@@ -39,6 +47,8 @@
           variant="round"
           elevation="3"
           type="number"
+          v-model="sale.defaultPrice"
+          hint="O preço fora da promoção."
         />
       </v-col>
       <v-col class="pa-0">
@@ -48,12 +58,14 @@
           variant="round"
           elevation="3"
           type="number"
+          v-model="sale.targetPrice"
+          hint="O preço caso a promoção for completada."
         />
       </v-col>
     </v-row>
 
-    <v-row class="mt-8">
-      <Input label="Palavras-chave" variant="round" elevation="3" />
+    <v-row class="justify-center mt-8">
+      <Button title="Cadastrar" @click="onCreateButtonClick" extended rounded />
     </v-row>
   </div>
 </template>
@@ -62,11 +74,39 @@
 import Input from "../components/Input.vue";
 import TextArea from "../components/TextArea.vue";
 import DatePicker from "../components/DatePicker.vue";
+import Button from "../components/Button.vue";
+import { HTTP } from "../api/HTTP";
 
 export default {
-  components: { Input, TextArea, DatePicker },
+  components: { Input, TextArea, DatePicker, Button },
+  data: () => ({
+    sale: {},
+  }),
   mounted() {
     this.$root.showToolbar("Mercado Pão de Açúcar");
+  },
+  methods: {
+    onCreateButtonClick() {
+      const saleDTO = {
+        cnpj: "9696969696",
+        title: this.sale.title,
+        description: this.sale.description,
+        target_amount: Number(this.sale.targetAmount),
+        expiration_date: this.sale.expirationDate,
+        target_price: Number(this.sale.targetPrice),
+        default_price: Number(this.sale.defaultPrice),
+        photo_link: "",
+      };
+
+      HTTP.post("/sale", saleDTO)
+        .then(() => {
+          this.$root.showSnackbar("Promoção cadastrada!");
+          this.$router.push("/store/home");
+        })
+        .catch(() => {
+          this.$root.showSnackbar("Oops! Houve um erro :(");
+        });
+    },
   },
 };
 </script>

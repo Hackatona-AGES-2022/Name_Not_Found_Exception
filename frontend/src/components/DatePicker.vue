@@ -18,9 +18,16 @@
         v-on="on"
         variant="round"
         elevation="3"
+        @input="$emit('change', date)"
       />
     </template>
-    <v-date-picker v-model="date" no-title scrollable>
+    <v-date-picker
+      v-model="date"
+      no-title
+      scrollable
+      v-bind="$attrs"
+      v-on="$listeners"
+    >
       <v-spacer></v-spacer>
       <v-btn text color="primary" @click="menu = false"> Cancel </v-btn>
       <v-btn text color="primary" @click="$refs.menu.save(date)"> OK </v-btn>
